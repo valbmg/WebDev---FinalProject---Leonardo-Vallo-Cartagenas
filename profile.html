@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JobQuest-Profile</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style media="screen">
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #080710;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+        }
+
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+.shape:first-child{
+    background: linear-gradient(
+        #0f7c30,
+        #c3ffda
+    );
+    left: -80px;
+    top: -80px;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to right,
+        #09938a,
+        #d2f0dc
+    );
+    right: -30px;
+    bottom: -80px;
+}
+
+        .profile-container {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.13);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 30px;
+            color: #fff;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logout-btn {
+            background-color: #ffffff;
+            color: #080710;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .section {
+            margin-top: 20px;
+        }
+
+        .section h3 {
+            margin-bottom: 10px;
+        }
+
+        .job-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .job-list li {
+            background-color: rgba(255, 255, 255, 0.07);
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-list li a {
+            color: #0f7c30;
+            text-decoration: none;
+        }
+
+        .job-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-edit-btn, .job-edit-btn, .edit-btn, .delete-btn, .cancel-btn, .submit-btn {
+            background-color: #ffffff;
+            color: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .profile-edit-btn {
+            background-color: #00a950;
+            color: white;
+            margin-right: 5px;
+            border-style: none;
+        }
+
+        .job-edit-btn {
+            background-color: #00a950;
+            color: white;
+            margin-right: 5px;
+            border-style: none;
+        }
+
+        .edit-btn {
+            background-color: #00a950;
+            color: white;
+            margin-right: 5px;
+            border-style: none;
+        }
+
+        .submit-btn {
+            background-color: #00a950;
+            color: white;
+            margin-right: 5px;
+            border-style: none;
+        }
+
+        .delete-btn {
+            background-color: #d9534f;
+            color: white;
+            border-style: none;
+        }
+
+        .cancel-btn {
+            background-color: #d9534f;
+            color: white;
+            border-style: none;
+        }
+
+        .form-input {
+            background: none;
+            border: none;
+            border-bottom: 2px solid #fff;
+            padding: 5px;
+            color: #fff;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .form-input:disabled {
+            border-bottom: 2px solid transparent;
+            color: #ccc;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group .job-edit-btn, .profile-edit-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px;
+            border: none;
+            background: none;
+            color: #00a950;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="profile-container">
+        <div class="logo">
+            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+        </div>
+        <div class="profile-header">
+            <h2>User Profile</h2>
+        </div>
+        <div class="section">
+            <h3>Profile Information</h3>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="user-name">Name</label>
+                    <input type="text" id="user-name" style="font-family: 'Poppins';" class="form-input" disabled>
+                    <button type="button" class="profile-edit-btn" data-edit-target="user-name"><i class="fas fa-pen"></i></button>
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Email</label>
+                    <input type="email" id="user-email" style="font-family: 'Poppins';" class="form-input" disabled>
+                    <button type="button" class="profile-edit-btn" data-edit-target="user-email"><i class="fas fa-pen"></i></button>
+                </div>
+                <div class="form-group">
+                    <label for="user-role">Role</label>
+                    <input type="text" id="user-role" style="font-family: 'Poppins';" class="form-input" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="user-number">Phone Number</label>
+                    <input type="text" id="user-number" style="font-family: 'Poppins';" class="form-input" placeholder="Edit Phone Number" disabled >
+                    <button type="button" class="profile-edit-btn" data-edit-target="user-number"><i class="fas fa-pen"></i></button>
+                </div>
+                <br>
+                <button type="submit" class="submit-btn" style="font-family: 'Poppins';">Save Changes</button>
+            </form>
+        </div>
+        <div class="section" id="applied-jobs-section" style="display: none;">
+            <h3>Jobs Applied</h3>
+            <ul class="job-list" id="applied-jobs-list">
+                <!-- Applied jobs will be appended here -->
+            </ul>
+        </div>
+        <div class="section" id="posted-jobs-section" style="display: none;">
+            <h3>Jobs Posted</h3>
+            <ul class="job-list" id="posted-jobs-list">
+                <!-- Posted jobs will be appended here -->
+            </ul>
+        </div>
+        <a href="login.html" class="logout-btn">Log Out</a>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    
+        const supabaseUrl = 'https://zckguqulahnuadvihsuz.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpja2d1cXVsYWhudWFkdmloc3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIxMjc3NjcsImV4cCI6MjAyNzcwMzc2N30.ZE_jpATp2zLMmHC1awHEYPkf6qmQHUwAYC3-c0XzZJg'; // Replace with your actual Supabase key
+        const supabase = createClient(supabaseUrl, supabaseKey);
+    
+        const userNameElement = document.getElementById('user-name');
+        const userEmailElement = document.getElementById('user-email');
+        const userRoleElement = document.getElementById('user-role');
+        const userNumberElement = document.getElementById('user-number');
+        const appliedJobsSection = document.getElementById('applied-jobs-section');
+        const postedJobsSection = document.getElementById('posted-jobs-section');
+        const appliedJobsList = document.getElementById('applied-jobs-list');
+        const postedJobsList = document.getElementById('posted-jobs-list');
+        const profileForm = document.getElementById('profile-form');
+    
+        async function getUserProfile() {
+            const user = JSON.parse(localStorage.getItem('user'));
+    
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+    
+            // Fetch user details from Supabase
+            const { data: userData, error: userError } = await supabase
+                .from('User')
+                .select()
+                .eq('email', user.email);
+    
+            if (userError) {
+                console.error('Error fetching user details:', userError.message);
+                return;
+            }
+    
+            if (userData.length > 0) {
+                const userDetails = userData[0];
+    
+                // Update local storage with the latest user details
+                localStorage.setItem('user', JSON.stringify(userDetails));
+    
+                // Display user information
+                userNameElement.value = userDetails.name;
+                userEmailElement.value = userDetails.email;
+                userRoleElement.value = userDetails.role;
+                userNumberElement.value = userDetails.number;
+    
+                // Fetch and display jobs based on the user role
+                if (userDetails.role === 'student') {
+                    appliedJobsSection.style.display = 'block';
+    
+                    const { data: applications, error: applicationError } = await supabase
+                        .from('Application')
+                        .select('jobId, applicationId')
+                        .eq('userId', userDetails.userId);
+    
+                    if (applicationError) {
+                        console.error('Error fetching applied jobs:', applicationError);
+                    } else {
+                        const jobIds = applications.map(application => application.jobId);
+                        const applicationIds = applications.map(application => application.applicationId);
+                        console.log('Applied job IDs:', jobIds);
+                        const { data: jobs, error: jobsError } = await supabase
+                            .from('Jobs')
+                            .select('jobId, job_title')
+                            .in('jobId', jobIds);
+    
+                        if (jobsError) {
+                            console.error('Error fetching jobs:', jobsError);
+                        } else {
+                            jobs.forEach((job, index) => {
+                                const applicationId = applicationIds[index];
+                                const jobItem = document.createElement('li');
+                                jobItem.innerHTML = `
+                                    <p>${job.job_title}</p>
+                                    <button class="edit-btn" style="font-family: 'Poppins';" data-application-id="${applicationId}">Edit</button>
+                                    <button class="cancel-btn" style="font-family: 'Poppins';" data-job-id="${job.jobId}">Remove</button>
+                                `;
+                                appliedJobsList.appendChild(jobItem);
+                            });
+    
+                            document.querySelectorAll('.edit-btn').forEach(button => {
+                                button.addEventListener('click', async (e) => {
+                                    const applicationId = e.target.getAttribute('data-application-id');
+                                    window.location.href = `edit_application.html?id=${applicationId}`;
+                                });
+                            });
+    
+                            document.querySelectorAll('.cancel-btn').forEach(button => {
+                                button.addEventListener('click', async (e) => {
+                                    const jobId = e.target.getAttribute('data-job-id');
+                                    await cancelApplication(userDetails.userId, jobId);
+                                });
+                            });
+                        }
+                    }
+                } else if (userDetails.role === 'employer') {
+                    postedJobsSection.style.display = 'block';
+    
+                    const { data: postedJobs, error: postedJobsError } = await supabase
+                        .from('Jobs')
+                        .select('jobId, job_title')
+                        .eq('userId', userDetails.userId);
+    
+                    if (postedJobsError) {
+                        console.error('Error fetching posted jobs:', postedJobsError);
+                    } else {
+                        const jobIds = postedJobs.map(job => job.jobId);
+                        console.log('Posted job IDs:', jobIds);
+                        postedJobs.forEach(job => {
+                            const jobItem = document.createElement('li');
+                            jobItem.innerHTML = `
+                                <p>${job.job_title}</p>
+                                <button class="job-edit-btn" style="font-family: 'Poppins';" data-job-id="${job.jobId}">Edit</button>
+                                <button class="delete-btn" style="font-family: 'Poppins';" data-job-id="${job.jobId}">Remove</button>
+                            `;
+                            postedJobsList.appendChild(jobItem);
+                        });
+    
+                        document.querySelectorAll('.job-edit-btn').forEach(button => {
+                            button.addEventListener('click', async (e) => {
+                                const jobId = e.target.getAttribute('data-job-id');
+                                window.location.href = `edit_job.html?id=${jobId}`;
+                            });
+                        });
+    
+                        document.querySelectorAll('.delete-btn').forEach(button => {
+                            button.addEventListener('click', async (e) => {
+                                const jobId = e.target.getAttribute('data-job-id');
+                                await deleteJob(jobId);
+                            });
+                        });
+                    }
+                }
+            } else {
+                console.error('User not found');
+            }
+        }
+    
+        async function cancelApplication(userId, jobId) {
+            try {
+                const { error } = await supabase
+                    .from('Application')
+                    .delete()
+                    .match({ userId: userId, jobId: jobId });
+    
+                if (error) {
+                    throw error;
+                }
+    
+                const { data: job, error: jobError } = await supabase
+                    .from('Jobs')
+                    .select('vacancy')
+                    .eq('jobId', jobId)
+                    .single();
+    
+                if (jobError) {
+                    throw jobError;
+                }
+    
+                const newVacancy = job.vacancy + 1;
+    
+                const { error: updateError } = await supabase
+                    .from('Jobs')
+                    .update({ vacancy: newVacancy })
+                    .eq('jobId', jobId);
+    
+                if (updateError) {
+                    throw updateError;
+                }
+    
+                alert('Application cancelled successfully!');
+                window.location.reload();
+            } catch (error) {
+                console.error('Error cancelling application:', error);
+                alert('Error cancelling application');
+            }
+        }
+    
+        async function deleteJob(jobId) {
+            try {
+                const { error } = await supabase
+                    .from('Jobs')
+                    .delete()
+                    .eq('jobId', jobId);
+    
+                if (error) {
+                    throw error;
+                }
+    
+                alert('Job deleted successfully!');
+                window.location.reload();
+            } catch (error) {
+                console.error('Error deleting job:', error);
+                alert('Error deleting job');
+            }
+        }
+    
+        document.querySelectorAll('.profile-edit-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const target = e.target.getAttribute('data-edit-target');
+                const inputElement = document.getElementById(target);
+                inputElement.disabled = !inputElement.disabled;
+                if (!inputElement.disabled) {
+                    inputElement.focus();
+                }
+            });
+        });
+    
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            const newName = userNameElement.value;
+            const newEmail = userEmailElement.value;
+            const newNumber = userNumberElement.value;
+    
+            if (newName && newEmail && newNumber) {
+                try {
+                    const user = JSON.parse(localStorage.getItem('user'));
+    
+                    const { data, error } = await supabase
+                        .from('User')
+                        .update({ name: newName, email: newEmail, number: newNumber })
+                        .eq('userId', user.userId);
+    
+                    if (error) {
+                        throw error;
+                    }
+    
+                    // Update local storage
+                    user.name = newName;
+                    user.email = newEmail;
+                    user.number = newNumber;
+                    localStorage.setItem('user', JSON.stringify(user));
+    
+                    alert('Profile updated successfully!');
+                    window.location.reload();
+                } catch (error) {
+                    console.error('Error updating profile:', error);
+                    alert('Error updating profile');
+                }
+            }
+        });
+    
+        getUserProfile();
+    </script>
+    
+    
+</body>
+</html>

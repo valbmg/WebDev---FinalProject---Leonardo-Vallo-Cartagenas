@@ -1,0 +1,543 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>JobQuest-HomePage</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/price_rangs.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .popup .close-btn {
+            background-color: #080710;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .notification-bell .notification-indicator {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: none;
+        }
+
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 300px;
+        }
+
+        .notification-dropdown.active {
+            display: block;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item div {
+            flex-grow: 1;
+        }
+
+        .notification-item p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .notification-item span {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .notification-footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+
+        .notification-item.unread {
+            background-color: #e0e0e0;
+        }
+
+        .jobActionButton {
+            background-color: #00A950;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        .jobActionButton:hover {
+            background-color: #008F45;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" width="10" height="10">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+    <header>
+        <!-- Header Start -->
+        <div class="header-area header-transparrent">
+            <div class="headder-top header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-2">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                            </div>  
+                        </div>
+                        <div class="col-lg-9 col-md-9">
+                            <div class="menu-wrapper">
+                                <!-- Main-menu -->
+                                <div class="main-menu">
+                                    <nav class="d-none d-lg-block">
+                                        <ul id="navigation">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="job_listing.html" class="find-job">Find a Job</a></li>
+                                            <li><a href="job_posting.html" class="post-job">Post a Job</a></li>
+                                            <li><a href="about.html">About Us</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span id="notification-bell" class="notification-bell" style="display:none;">
+                                    <i class="fas fa-bell"></i>
+                                    <div class="notification-indicator"></div>
+                                    <div class="notification-dropdown">
+                                        <div class="notification-footer">
+                                            <a href="notifications.html">View All</a>
+                                        </div>
+                                    </div>
+                                </span>          
+                                <!-- Header-btn -->
+                                <div class="header-btn d-none f-right d-lg-block">
+                                    <span><a href="profile.html" class="btn head-btn2">Profile</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    <main>
+        <!-- slider Area Start-->
+        <div class="slider-area ">
+            <!-- Mobile Menu -->
+            <div class="slider-active">
+                <div class="single-slider slider-height d-flex align-items-center" data-background="assets/img/hero/bg_usc.png">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-9 col-md-10">
+                                <div class="hero__caption">
+                                    <h1>Find Your Dream Job Today!</h1>
+                                    <button id="jobActionButton" class="jobActionButton"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- slider Area End-->
+        <!-- Our Services Start -->
+        <div class="our-services section-pad-t30">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center">
+                            <h2>Browse Top Categories</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-contnet-center" id="top-categories">
+                    <!-- Top categories will be dynamically populated here -->
+                </div>
+                <!-- More Btn -->
+                <!-- Section Button -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="browse-btn2 text-center mt-50">
+                            <a href="job_listing.html" class="border-btn2">Browse All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Our Services End -->
+    </main>
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-bg footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                       <div class="single-footer-caption mb-50">
+                         <div class="single-footer-caption mb-30">
+                             <div class="footer-tittle">
+                                 <h4>About Us</h4>
+                                 <div class="footer-pera">
+                                     <p>We are dedicated in empowering the students of University of San Carlos with the connections they need for career success. 
+                                     </p>
+                                </div>
+                             </div>
+                         </div>
+                       </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Contact</h4>
+                                <ul>
+                                    <li><p>Gov. M. Cuenco Ave., Talamban, Talamban, Cebu City 6000</p></li>
+                                    <li><p>Phone : +639432070590</p></li>
+                                    <li><p>Email : jobquest@gmail.com</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Other Information</h4>
+                                <ul>
+                                    <li><a href="#">Security and Privacy</a></li>
+                                    <li><a href="#">Terms and Conditions</a></li>
+                                    <li><a href="#">EULA</a></li>
+                                    <li><a href="#">Help Centre</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Join our Newsletter</h4>
+                                <div class="footer-pera footer-pera2">
+                                 <p>Don't miss out—join our community and take a proactive step towards your career success!</p>
+                             </div>
+                             <!-- Form -->
+                             <div class="footer-form">
+                                 <div id="mc_embed_signup">
+                                     <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                     method="get" class="subscribe_form relative mail_part">
+                                         <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                         class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                         onblur="this.placeholder = ' Email Address '">
+                                         <div class="form-icon">
+                                             <button type="submit" name="submit" id="newsletter-submit"
+                                             class="email_icon newsletter-submit button-contactForm"><img src="assets/img/icon/form.png" alt=""></button>
+                                         </div>
+                                         <div class="mt-10 info"></div>
+                                     </form>
+                                 </div>
+                             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </footer>
+
+    <!-- JS here -->
+    <!-- All JS Custom Plugins Link Here here -->
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <script src="./assets/js/price_rangs.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
+    <!-- contact js -->
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+    <!-- Jquery Plugins, main Jquery -->    
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    
+        // Initialize Supabase client
+        const supabaseUrl = 'https://zckguqulahnuadvihsuz.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpja2d1cXVsYWhudWFkdmloc3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIxMjc3NjcsImV4cCI6MjAyNzcwMzc2N30.ZE_jpATp2zLMmHC1awHEYPkf6qmQHUwAYC3-c0XzZJg';
+        const supabase = createClient(supabaseUrl, supabaseKey);
+    
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+    
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+    
+            console.log('Logged-in user:', user);
+    
+            // Fetch user details from Supabase
+            const { data: userData, error: userError } = await supabase
+                .from('User')
+                .select()
+                .eq('email', user.email);
+    
+            if (userError) {
+                console.error('Error fetching user details:', userError.message);
+                return;
+            }
+    
+            if (userData.length > 0) {
+                console.log('Logged-in user details:', userData[0]);
+            } else {
+                console.log('User not found');
+            }
+    
+            // Set action button text based on user role
+            const jobActionButton = document.getElementById('jobActionButton');
+            if (user.role === 'employer') {
+                jobActionButton.innerText = 'Post a Job Now!';
+                jobActionButton.onclick = () => window.location.href = 'job_posting.html';
+            } else {
+                jobActionButton.innerText = 'Find a Job Now!';
+                jobActionButton.onclick = () => window.location.href = 'job_listing.html';
+            }
+    
+            // Handle clicks for "Post a Job" and "Find a Job" with role check
+            document.querySelector('.post-job').addEventListener('click', (e) => {
+                if (user.role === 'student') {
+                    e.preventDefault();
+                    showPopup('You are registered as a Student.');
+                }
+            });
+    
+            document.querySelector('.find-job').addEventListener('click', (e) => {
+                if (user.role === 'employer') {
+                    e.preventDefault();
+                    showPopup('You are registered as an Employer.');
+                }
+            });
+    
+            function showPopup(message) {
+                const popup = document.createElement('div');
+                popup.classList.add('popup');
+                popup.innerHTML = `
+                    <p>${message}</p>
+                    <button class="close-btn">Close</button>
+                `;
+                document.body.appendChild(popup);
+    
+                document.querySelector('.close-btn').addEventListener('click', () => {
+                    popup.remove();
+                });
+    
+                popup.style.display = 'block';
+            }
+    
+            // Fetch top categories and job counts
+            async function fetchTopCategories() {
+                const categories = [
+                    "Creative Design", "Product Design", "Sales & Marketing", "Mobile App Development",
+                    "Construction & Engineering", "IT & Software Development", "Real Estate", "Content Creation & Writing"
+                ];
+    
+                const container = document.getElementById('top-categories');
+                container.innerHTML = '';
+    
+                for (let category of categories) {
+                    const { count } = await supabase
+                        .from('Jobs')
+                        .select('*', { count: 'exact' })
+                        .eq('category', category);
+    
+                    const categoryCard = document.createElement('div');
+                    categoryCard.classList.add('col-xl-3', 'col-lg-3', 'col-md-4', 'col-sm-6');
+                    categoryCard.innerHTML = `
+                        <div class="single-services text-center mb-30">
+                            <div class="services-ion">
+                                <span class="flaticon-tour"></span>
+                            </div>
+                            <div class="services-cap">
+                                <h5><a href="job_listing.html?category=${encodeURIComponent(category)}">${category}</a></h5>
+                                <span>(${count})</span>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(categoryCard);
+                }
+            }
+    
+            fetchTopCategories();
+
+            // Fetch and display notifications
+            async function fetchNotifications() {
+                if (user.role === 'employer') {
+                    const { data: applications, error: applicationsError } = await supabase
+                        .from('Application')
+                        .select('*, Jobs(*), User(*)')
+                        .match({ 'Jobs.userId': user.userId });
+
+                    if (applicationsError) {
+                        console.error('Error fetching applications:', applicationsError.message);
+                        return;
+                    }
+
+                    if (applications.length > 0) {
+                        console.log('Employer applications:', applications);
+                        const notificationBell = document.getElementById('notification-bell');
+                        const notificationIndicator = notificationBell.querySelector('.notification-indicator');
+                        const notificationDropdown = notificationBell.querySelector('.notification-dropdown');
+
+                        // Initialize read notifications from local storage
+                        const readNotifications = JSON.parse(localStorage.getItem('readNotifications')) || [];
+
+                        notificationBell.style.display = 'block';
+                        notificationDropdown.innerHTML = '';
+
+                        const unreadNotifications = applications.filter(application => !readNotifications.includes(application.id));
+                        if (unreadNotifications.length > 0) {
+                            notificationIndicator.style.display = 'block';
+                        } else {
+                            notificationIndicator.style.display = 'none';
+                        }
+
+                        applications.forEach(application => {
+                            const notificationMessage = `<strong>${application.first_name} ${application.last_name} applied for ${application.Jobs.job_title}</strong><br>Email: ${application.email}<br>Phone: ${application.phone}`;
+                            const notificationItem = document.createElement('div');
+                            notificationItem.classList.add('notification-item');
+                            if (readNotifications.includes(application.id)) {
+                                notificationItem.style.backgroundColor = '#fff';
+                            } else {
+                                notificationItem.classList.add('unread');
+                            }
+                            notificationItem.innerHTML = `
+                                <div>
+                                    <p>${notificationMessage}</p>
+                                    <span>${new Date(application.date).toLocaleString()}</span>
+                                </div>
+                            `;
+                            notificationDropdown.insertBefore(notificationItem, notificationDropdown.firstChild);
+
+                            notificationItem.addEventListener('click', () => {
+                                if (notificationItem.classList.contains('unread')) {
+                                    notificationItem.classList.remove('unread');
+                                    notificationItem.style.backgroundColor = '#fff';
+
+                                    // Update read notifications in local storage
+                                    readNotifications.push(application.id);
+                                    localStorage.setItem('readNotifications', JSON.stringify(readNotifications));
+
+                                    // Update notification indicator
+                                    const remainingUnread = applications.filter(application => !readNotifications.includes(application.id));
+                                    if (remainingUnread.length > 0) {
+                                        notificationIndicator.style.display = 'block';
+                                    } else {
+                                        notificationIndicator.style.display = 'none';
+                                    }
+                                }
+                            });
+                        });
+
+                        notificationBell.addEventListener('click', () => {
+                            notificationDropdown.classList.toggle('active');
+                        });
+                    }
+                }
+            }
+
+            fetchNotifications();
+        });
+    </script>
+    
+</body>
+</html>

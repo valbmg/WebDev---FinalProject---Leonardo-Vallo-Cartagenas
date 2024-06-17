@@ -1,0 +1,254 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and HTML */
+body, html {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #333;
+}
+
+/* Preloader */
+#preloader-active {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+}
+
+.preloader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.preloader-inner {
+    position: relative;
+}
+
+.preloader-circle {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.pere-text img {
+    width: 40px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Header */
+.header-area {
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+}
+
+.header-transparrent .headder-top {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
+}
+
+.header-sticky {
+    position: sticky;
+    top: 0;
+    background: #333;
+    z-index: 999;
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+/* Navigation */
+#navigation {
+    display: flex;
+    list-style: none;
+}
+
+#navigation li {
+    margin-right: 20px;
+}
+
+#navigation li a {
+    color: white;
+    text-decoration: none;
+}
+
+.header-btn a {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+/* Slider Area */
+.slider-area {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+.hero__caption h1 {
+    font-size: 48px;
+    color: white;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.input-form input {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.select-form select {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search-form a {
+    background: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+/* Services */
+.our-services {
+    padding: 60px 0;
+}
+
+.section-tittle {
+    margin-bottom: 40px;
+}
+
+.section-tittle h2 {
+    font-size: 36px;
+}
+
+.single-services {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.single-services .services-ion {
+    font-size: 40px;
+    color: #ff6f61;
+}
+
+.single-services .services-cap h5 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.single-services .services-cap span {
+    color: #ff6f61;
+}
+
+/* Featured Jobs */
+.single-job-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.single-job-items .company-img img {
+    max-height: 50px;
+}
+
+.single-job-items .job-tittle h4 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.single-job-items .job-tittle ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.single-job-items .job-tittle ul li {
+    margin-right: 10px;
+}
+
+.items-link a {
+    text-decoration: none;
+    background: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+/* Footer */
+.footer-area {
+    background: #333;
+    color: white;
+    padding: 40px 0;
+}
+
+.footer-tittle h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.footer-tittle ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-tittle ul li {
+    margin-bottom: 10px;
+}
+
+.footer-tittle ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-bottom-area {
+    background: #222;
+    padding: 20px 0;
+}
+
+.footer-social a {
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+}

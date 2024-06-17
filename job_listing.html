@@ -1,0 +1,833 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>JobQuest-JobListing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Pop-up styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .popup .close-btn {
+            background-color: #080710;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Notification bell styles */
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .notification-bell .notification-indicator {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: none;
+        }
+
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 300px;
+        }
+
+        .notification-dropdown.active {
+            display: block;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item div {
+            flex-grow: 1;
+        }
+
+        .notification-item p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .notification-item span {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .notification-footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+
+        .notification-item.unread {
+            background-color: #e0e0e0;
+        }
+
+        /* Job Location input style */
+        .location-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .location-input::placeholder {
+            color: #aaa;
+        }
+
+        /* Job details dropdown style */
+        .job-details-dropdown {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #fff;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .job-details-dropdown .close-details {
+            cursor: pointer;
+            font-size: 20px;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #000;
+        }
+
+        .job-details-dropdown .apply-now {
+            background-color: #00A950;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Job card styles */
+        .job-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .job-card h4 {
+            margin: 0 0 10px;
+        }
+
+        .job-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .job-card ul li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .job-card .view-more {
+            color: #00A950;
+            cursor: pointer;
+            border: 1px solid #00A950;
+            padding: 5px 15px; /* Increased padding for better appearance */
+            border-radius: 20px; /* More rounded corners for the button */
+            text-decoration: none;
+            background-color: white;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition effect for color and background */
+        }
+
+        .job-card .view-more.right-align {
+            float: right; /* Aligns the element to the right */
+        }
+
+        .job-card .view-more:hover {
+            background-color: #00A950; /* New background color on hover */
+            color: white; /* New text color on hover */
+        }
+
+        .job-card .apply-now {
+            color: #00A950;
+            cursor: pointer;
+            border: 1px solid #00A950;
+            padding: 5px 15px; /* Increased padding for better appearance */
+            border-radius: 20px; /* More rounded corners for the button */
+            text-decoration: none;
+            background-color: white;
+            display: inline-block;
+            margin-top: 10px;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition effect for color and background */
+        }
+
+        .job-card .apply-now.right-align {
+            float: right; /* Aligns the element to the right */
+        }
+
+        .job-card .apply-now:hover {
+            background-color: #00A950; /* New background color on hover */
+            color: white; /* New text color on hover */
+        }
+
+        .items-link2 {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Style for the search bar container */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Style for the search input field */
+.search-input {
+    padding: 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex: 1;
+    font-size: 16px;
+}
+
+/* Style for the search button */
+.search-button {
+    padding: 10px 20px;
+    background-color: #00A950;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Hover effect for the search button */
+.search-button:hover {
+    background-color: #008F45;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+        <div class="header-area header-transparrent">
+            <div class="headder-top header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-2">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                            </div>  
+                        </div>
+                        <div class="col-lg-9 col-md-9">
+                            <div class="menu-wrapper">
+                                <!-- Main-menu -->
+                                <div class="main-menu">
+                                    <nav class="d-none d-lg-block">
+                                        <ul id="navigation">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="job_listing.html" class="find-job">Find a Job</a></li>
+                                            <li><a href="job_posting.html" class="post-job">Post a Job</a></li>
+                                            <li><a href="about.html">About Us</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <span id="notification-bell" class="notification-bell" style="display:none;">
+                                    <i class="fas fa-bell"></i>
+                                    <div class="notification-indicator"></div>
+                                    <div class="notification-dropdown">
+                                        <div class="notification-footer">
+                                            <a href="notifications.html">View All</a>
+                                        </div>
+                                    </div>
+                                </span>          
+                                <!-- Header-btn -->
+                                <div class="header-btn d-none f-right d-lg-block">
+                                    <a href="profile.html" class="btn head-btn2">Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/findajob.png">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero Area End -->
+        <!-- Job List Area Start -->
+        <div class="job-listing-area pt-120 pb-120">
+            <div class="container">
+                <div class="row">
+                    <!-- Left content -->
+                    <div class="col-xl-3 col-lg-3 col-md-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="small-section-tittle2 mb-45">
+                                    <div class="ion"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="12px">
+                                            <path fill-rule="evenodd"  fill="rgb(27, 207, 107)" d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
+                                        </svg>
+                                    </div>
+                                    <h4>Filter Jobs</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Job Category Listing start -->
+                        <div class="job-category-listing mb-50">
+                            <!-- single one -->
+                            <div class="single-listing">
+                                <div class="small-section-tittle2">
+                                    <h4>Job Category</h4>
+                                </div>
+                                <!-- Select job items start -->
+                                <div class="select-job-items2">
+                                    <select id="categoryFilter">
+                                        <option value="">All Category</option>
+                                        <option value="Creative Design">Creative Design</option>
+                                        <option value="Product Design">Product Design</option>
+                                        <option value="Sales & Marketing">Sales & Marketing</option>
+                                        <option value="Mobile App Development">Mobile App Development</option>
+                                        <option value="Construction & Engineering">Construction & Engineering</option>
+                                        <option value="IT & Software Development">IT & Software Development</option>
+                                        <option value="Real Estate">Real Estate</option>
+                                        <option value="Content Creation & Writing">Content Creation & Writing</option>
+                                    </select>
+                                </div>
+                                <!--  Select job items End-->
+                                <!-- Job Type -->
+                                <div class="select-Categories pt-80 pb-50">
+                                    <div class="small-section-tittle2">
+                                        <h4>Job Type</h4>
+                                    </div>
+                                    <label class="container">Full Time
+                                        <input type="checkbox" id="full-time">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Part Time
+                                        <input type="checkbox" id="part-time">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Contract
+                                        <input type="checkbox" id="contract">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Temporary
+                                        <input type="checkbox" id="temporary">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- single two -->
+                            <div class="single-listing">
+                                <div class="small-section-tittle2">
+                                    <h4>Job Location</h4>
+                                </div>
+                                <input type="text" id="locationFilter" class="location-input" placeholder="Enter location">
+                            </div>
+                        </div>
+                        <!-- Job Category Listing End -->
+                    </div>
+                    <!-- Right content -->
+                    <div class="col-xl-9 col-lg-9 col-md-8">
+                        <!-- Featured_job_start -->
+                        <section class="featured-job-area">
+                            <div class="container">
+                                <!-- Count of Job list Start -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="count-job mb-35">
+                                            <span id="jobCount">0 Jobs found</span>
+                                        </div>
+                                        <!-- Add search button here -->
+                                        <div class="search-bar">
+                                            <input type="text" class="search-input" id="keyword" placeholder="Keyword or Job Title">
+                                            <button class="search-button" onclick="fetchJobs()">Search</button>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                                <!-- Count of Job list End -->
+                                <!-- Jobs List -->
+                                <div id="job-list">
+                                    <!-- Jobs will be dynamically loaded here -->
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Featured_job_end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Job List Area End -->
+        <!--Pagination Start  -->
+        <div class="pagination-area pb-115 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="single-wrap d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Pagination End  -->
+    </main>
+    <footer>
+       <!-- Footer Start-->
+       <div class="footer-area footer-bg footer-padding">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                   <div class="single-footer-caption mb-50">
+                     <div class="single-footer-caption mb-30">
+                         <div class="footer-tittle">
+                             <h4>About Us</h4>
+                             <div class="footer-pera">
+                                 <p>We are dedicated in empowering the students of University of San Carlos with the connections they need for career success. 
+                                 </p>
+                            </div>
+                         </div>
+                     </div>
+                   </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md=4 col-sm-5">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>Contact</h4>
+                            <ul>
+                                <li>
+                                <p>Gov. M. Cuenco Ave., Talamban, Talamban, Cebu City 6000</p>
+                                </li>
+                                <li><p>Phone : +639432070590</p></li>
+                                <li><p>Email : jobquest@gmail.com</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md=4 col-sm-5">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>Other Information</h4>
+                            <ul>
+                                <li><a href="#">Security and Privacy</a></li>
+                                <li><a href="#">Terms and Conditions</a></li>
+                                <li><a href="#">EULA</a></li>
+                                <li><a href="#">Help Centre</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md=4 col-sm-5">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>Join our Newsletter</h4>
+                            <div class="footer-pera footer-pera2">
+                             <p>Don't miss out—join our community and take a proactive step towards your career success!</p>
+                         </div>
+                         <!-- Form -->
+                         <div class="footer-form" >
+                             <div id="mc_embed_signup">
+                                 <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                 method="get" class="subscribe_form relative mail_part">
+                                     <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                     class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                     onblur="this.placeholder = ' Email Address '">
+                                     <div class="form-icon">
+                                         <button type="submit" name="submit" id="newsletter-submit"
+                                         class="email_icon newsletter-submit button-contactForm"><img src="assets/img/icon/form.png" alt=""></button>
+                                     </div>
+                                     <div class="mt-10 info"></div>
+                                 </form>
+                             </div>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS here -->
+    <!-- All JS Custom Plugins Link Here here -->
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <script src="./assets/js/price_rangs.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
+    <!-- contact js -->
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+    <!-- Jquery Plugins, main Jquery -->    
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+        const supabaseUrl = 'https://zckguqulahnuadvihsuz.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpja2d1cXVsYWhudWFkdmloc3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIxMjc3NjcsImV4cCI6MjAyNzcwMzc2N30.ZE_jpATp2zLMmHC1awHEYPkf6qmQHUwAYC3-c0XzZJg';
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Log user details to console
+            console.log('Logged in user details:', user);
+
+            // Handle clicks for "Post a Job" and "Find a Job" with role check
+            document.querySelector('.post-job').addEventListener('click', (e) => {
+                if (user.role === 'student') {
+                    e.preventDefault();
+                    showPopup('You are registered as a Student.');
+                }
+            });
+
+            document.querySelector('.find-job').addEventListener('click', (e) => {
+                if (user.role === 'employer') {
+                    e.preventDefault();
+                    showPopup('You are registered as an Employer.');
+                }
+            });
+
+            function showPopup(message) {
+                const popup = document.createElement('div');
+                popup.classList.add('popup');
+                popup.innerHTML = `
+                    <p>${message}</p>
+                    <button class="close-btn">Close</button>
+                `;
+                document.body.appendChild(popup);
+
+                document.querySelector('.close-btn').addEventListener('click', () => {
+                    popup.remove();
+                });
+
+                popup.style.display = 'block';
+            }
+
+            // Fetch and display jobs
+            async function fetchJobs() {
+                const category = document.getElementById('categoryFilter').value;
+                const location = document.getElementById('locationFilter').value;
+                const keyword = document.getElementById('keyword').value;
+                const jobTypeFilters = {
+                    fullTime: document.getElementById('full-time').checked,
+                    partTime: document.getElementById('part-time').checked,
+                    contract: document.getElementById('contract').checked,
+                    temporary: document.getElementById('temporary').checked,
+                };
+
+                let query = supabase.from('Jobs').select('*');
+
+                if (category) {
+                    query = query.eq('category', category);
+                }
+                if (location) {
+                    query = query.ilike('location', `%${location}%`);
+                }
+                if (keyword) {
+                    query = query.ilike('job_title', `%${keyword}%`).or(`job_description.ilike.%${keyword}%`);
+                }
+                if (jobTypeFilters.fullTime) {
+                    query = query.eq('job_type', 'Full-Time');
+                }
+                if (jobTypeFilters.partTime) {
+                    query = query.eq('job_type', 'Part-Time');
+                }
+                if (jobTypeFilters.contract) {
+                    query = query.eq('job_type', 'Contract');
+                }
+                if (jobTypeFilters.temporary) {
+                    query = query.eq('job_type', 'Temporary');
+                }
+
+                const { data, error } = await query;
+
+                if (error) {
+                    console.error('Error fetching jobs:', error.message);
+                    return;
+                }
+
+                const jobList = document.getElementById('job-list');
+                jobList.innerHTML = '';
+
+                data.forEach(job => {
+                    const jobItem = document.createElement('div');
+                    jobItem.classList.add('job-card');
+                    jobItem.innerHTML = `
+                        <div class="job-items">
+                            <div class="job-tittle job-tittle2">
+                                <h4><strong>${job.job_title}</strong></h4>
+                                <ul>
+                                    <div><li><strong>${job.company}&emsp;</strong></li></div>
+                                    <li>${job.category}&emsp;</li>
+                                    <li><i class="fas fa-map-marker-alt"></i>&ensp;${job.location}</li>
+                                    <li>&emsp;<strong>₱ </strong>${job.salary.toLocaleString()}</li>
+                                    <li>&emsp;Vacancy: ${job.vacancy}</li>
+                                </ul>
+                            </div>
+                            <a href="#" class="view-more" data-job-id="${job.jobId}">View more</a>
+                        </div>
+                        <div id="job-details-${job.jobId}" class="job-details-dropdown">
+                            <a href="job_listing.html"><span class="close-details" onclick="toggleDropdown(${job.jobId})">X</span></a>
+                            <div>
+                                <h4><strong>${job.job_title}</strong></h4>
+                                <p><strong>Company:</strong> ${job.company}</p>
+                                <p><strong>Location:</strong> ${job.location}</p>
+                                <p><strong>Salary:</strong> ₱${job.salary.toLocaleString()}</p>
+                                <p><strong>Job Type:</strong> ${job.job_type}</p>
+                                <p><strong>Description:</strong> ${job.job_description}</p>
+                                <p><strong>Requirements:</strong> ${job.requirements}</p>
+                                <p><strong>Vacancy:</strong> ${job.vacancy}</p>
+                                <p><strong>Email Address:</strong> ${job.email}</p>
+                                <p><strong>Posted:</strong> ${job.posted_date}</p>
+                            </div>
+                            <a href="application.html?jobId=${job.jobId}"><button class="apply-now" data-job-id="${job.jobId}">Apply now</button></a>
+                        </div>
+                    `;
+                    jobList.appendChild(jobItem);
+                });
+
+                document.getElementById('jobCount').textContent = `${data.length} Jobs found`;
+
+                document.querySelectorAll('.view-more').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const jobId = e.target.getAttribute('data-job-id');
+                        toggleDropdown(jobId);
+                    });
+                });
+            }
+
+            function toggleDropdown(jobId) {
+                const dropdown = document.getElementById(`job-details-${jobId}`);
+                if (dropdown.style.display === "none" || dropdown.style.display === "") {
+                    dropdown.style.display = "block";
+                } else {
+                    dropdown.style.display = "none";
+                }
+            }
+
+            fetchJobs();
+
+            // Filter jobs based on category, location, keyword, and job type
+            document.getElementById('categoryFilter').addEventListener('change', fetchJobs);
+            document.getElementById('locationFilter').addEventListener('input', fetchJobs);
+            document.getElementById('keyword').addEventListener('input', fetchJobs);
+            document.getElementById('full-time').addEventListener('change', fetchJobs);
+            document.getElementById('part-time').addEventListener('change', fetchJobs);
+            document.getElementById('contract').addEventListener('change', fetchJobs);
+            document.getElementById('temporary').addEventListener('change', fetchJobs);
+
+            // Notification logic
+            async function fetchNotifications() {
+                if (user.role === 'employer') {
+                    const { data: applications, error: applicationsError } = await supabase
+                        .from('Application')
+                        .select('*, Jobs(*), User(*)')
+                        .match({ 'Jobs.userId': user.userId });
+
+                    if (applicationsError) {
+                        console.error('Error fetching applications:', applicationsError.message);
+                        return;
+                    }
+
+                    if (applications.length > 0) {
+                        console.log('Employer applications:', applications);
+                        const notificationBell = document.getElementById('notification-bell');
+                        const notificationIndicator = notificationBell.querySelector('.notification-indicator');
+                        const notificationDropdown = notificationBell.querySelector('.notification-dropdown');
+
+                        // Initialize read notifications from local storage
+                        const readNotifications = JSON.parse(localStorage.getItem('readNotifications')) || [];
+
+                        notificationBell.style.display = 'block';
+                        notificationDropdown.innerHTML = '';
+
+                        const unreadNotifications = applications.filter(application => !readNotifications.includes(application.id));
+                        if (unreadNotifications.length > 0) {
+                            notificationIndicator.style.display = 'block';
+                        } else {
+                            notificationIndicator.style.display = 'none';
+                        }
+
+                        applications.forEach(application => {
+                            const notificationMessage = `${application.User.first_name} ${application.User.last_name} applied for ${application.Jobs.job_title}`;
+                            const notificationItem = document.createElement('div');
+                            notificationItem.classList.add('notification-item');
+                            if (readNotifications.includes(application.id)) {
+                                notificationItem.style.backgroundColor = '#fff';
+                            } else {
+                                notificationItem.classList.add('unread');
+                            }
+                            notificationItem.innerHTML = `
+                                <div>
+                                    <p>${notificationMessage}</p>
+                                    <span>${new Date(application.date).toLocaleString()}</span>
+                                </div>
+                            `;
+                            notificationDropdown.insertBefore(notificationItem, notificationDropdown.firstChild);
+
+                            notificationItem.addEventListener('click', () => {
+                                if (notificationItem.classList.contains('unread')) {
+                                    notificationItem.classList.remove('unread');
+                                    notificationItem.style.backgroundColor = '#fff';
+
+                                    // Update read notifications in local storage
+                                    readNotifications.push(application.id);
+                                    localStorage.setItem('readNotifications', JSON.stringify(readNotifications));
+
+                                    // Update notification indicator
+                                    const remainingUnread = applications.filter(application => !readNotifications.includes(application.id));
+                                    if (remainingUnread.length > 0) {
+                                        notificationIndicator.style.display = 'block';
+                                    } else {
+                                        notificationIndicator.style.display = 'none';
+                                    }
+                                }
+                            });
+                        });
+
+                        notificationBell.addEventListener('click', () => {
+                            notificationDropdown.classList.toggle('active');
+                        });
+                    }
+                }
+            }
+
+            fetchNotifications();
+        });
+    </script>
+</body>
+</html>
